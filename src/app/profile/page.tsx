@@ -26,10 +26,10 @@ export default function ProfilePage() {
         setData(res.data.data._id)
     }
     const changepassword = async () => {
-        const res = await axios.post('/api/users/changepassword', {}, {
-            withCredentials: true,
-        })
+
+        const res = await axios.post('/api/users/forgotpassword', {})
         toast.success(res.data.message)
+
     }
 
     return (

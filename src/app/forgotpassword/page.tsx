@@ -2,10 +2,11 @@
 import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-
+import { useRouter } from "next/navigation";
 
 export default function forgotpasswordPage() {
 
+    const router = useRouter();
     const [password, setPassword] = useState("");
     const [token, setToken] = useState("");
     const [changed, changing] = useState(false);
@@ -16,21 +17,22 @@ export default function forgotpasswordPage() {
         try {
             await axios.post('/api/users/changepassword', { password, token })
             console.log("changed password successfully");
+            router.push('/login');
         } catch (error: any) {
             setError(true);
-            console.log(error.reponse.data);
+            console.log(error.response?.data);
+
 
         }
 
     }
     useEffect(() => {
         const urlToken = window.location.search.split("=")[1];
-        setToken(urlToken);
+        setToken(urlToken || "");
+        if (urlToken) {
+            changing(true);
+        }
     }, []);
-
-    if (token.length > 0) {
-        changing(true);
-    }
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen py-2">
