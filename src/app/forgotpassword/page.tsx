@@ -4,7 +4,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function forgotpasswordPage() {
+export default function ForgotPasswordPage() {
 
     const router = useRouter();
     const [password, setPassword] = useState("");
